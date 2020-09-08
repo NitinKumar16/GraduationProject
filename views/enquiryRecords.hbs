@@ -1,0 +1,100 @@
+<div class="card shadow mt-4 parent_card">
+    <h1 class="heading">Enquiry</h1>
+
+    <hr class="sidebar-divider my-3">
+ 
+
+    <div class="card-body">
+    <div class="EnquiryTable">
+    <table id="EnquiryDataTable"  class="table table-bordered lb_table" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="table_header">Customer name</th>
+            <th class="table_header">Product Id</th>
+            <th class="table_header">Customer Email</th>
+            <th class="table_header">Actions</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Customer name</td>
+                <td>Product Id</td>
+                <td>Customer Email</td>
+                <td>Actions</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+    jQuery(document).ready(function(){
+        var EnquiryDataTable = jQuery('#EnquiryDataTable').DataTable({
+            "searching": false,
+            "paging":true,
+            "pageLength":10,
+            "processing":true,
+            "serverSide":true,
+            'ajax':{
+                'type':'POST',
+                'url':'/enquiry/enquirylist'
+            },
+            'columns':
+            [
+                {'data':'name',"defaultContent":"",'name':'Customer name'},
+                {'data':'productid',"defaultContent":"",'name':'Product Id'},
+                {'data':'email',"defaultContent":"",'name':'Customer Email'},
+                //{'data':'enquiryno',"defaultContent":"",'name':'Enquiry Sno'},
+            ],
+            'columnDefs':
+            [
+                {
+                    render:function(data , type , row)
+                    {
+                        tag= '<a class="btn btn-primary list_item_button lb_button" href="/enquiry/view/'+row.id+'">View</a><a class="btn btn-danger list_item_button lb_button ml-3" onclick="$(this).delete_entry(`'+row.id+'`);">Delete</a>';  
+                        return tag
+                    },
+                    "targets":3
+                },
+                {
+                    "searchable":false,
+                    "orderable":false,
+                },
+            ]
+        });
+
+
+       $.fn.delete_entry = function(id){
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.value) {
+
+                    $.get("/enquiry/delete/"+id, function(result){
+                        if(result.status == 200){
+                            EnquiryDataTable.draw();
+                                Swal.fire('Great!', 'Entries deleted successfully!', 'success');
+                            } else {
+                                Swal.fire('Oops...', 'Something went wrong!', 'error');
+                            }
+                    })
+
+                }
+            })
+
+        }
+
+    })
+</script>

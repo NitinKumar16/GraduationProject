@@ -1,0 +1,178 @@
+<div class="card shadow mt-4 parent_card">
+    <h1 class="heading">Categories</h1>
+    <hr class="sidebar-divider">
+    <div class="back">
+        <div class="back1"> 
+            <div class="button_base b04_3d_tick">
+                <div>
+                    <a class="button-text" href="/category/form/new">Add categoy</a>
+                </div>
+                <div>
+                    <a class="button-text-flip" href="/category/form/new">Add category</a>
+                </div>
+            </div>
+        </div>
+        <div class="back2">
+            <div class="button_base b04_3d_tick">
+                <div>
+                    <a class="button-text" href="#" data-toggle="modal" data-target="#excelModal">Excel Import</a>
+                </div>
+                <div>
+                    <a class="button-text-flip" href="#" data-toggle="modal" data-target="#excelModal">Excel Import</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+  <hr class="sidebar-divider my-3">
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control ml-5" type="search" id="searchName" placeholder="Search category name" aria-label="Search">
+      <button class="btn btn-outline-success ml-4" type="submit">Search</button>
+    </form>
+
+  <hr class="sidebar-divider my-3">
+
+    <div class="card-body">
+    <div class="CategoryTable">
+    <table id="CategoryDataTable"  class="table table-bordered lb_table" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="table_header">Name</th>
+            <th class="table_header">Slug</th>
+            <th class="table_header">Category ID</th>
+            <th class="table_header">Actions</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>Slug</td>
+                <td>Category ID</td>
+                <td>Actions</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+</div>
+
+<!--Excel upload modal-->
+    <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+
+            <div class="title_container">
+                <!-- Modal Heading -->
+                <h1 class="h3 mb-2 page_title">Upload Excel</h1>
+                <a class="close modal_close" type="button" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></a>
+
+            </div>
+            <hr class="lb_separator">
+
+             <form class="excelForm lb_form" id="excelForm" method="POST" enctype="multipart/form-data" action="/auth/importUsers">
+                <div class="form-group">
+                    <input type="file" class="form-control-file" id="excelFile" name="excelFile" accept=".xls,.xlsx,.csv" required>
+                    <button type="submit" class="btn btn-primary lb_button" style="margin-top: 50px;">Submit</button>
+                </div>
+             </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+    jQuery(document).ready(function(){
+        var CategoryDataTable = jQuery('#CategoryDataTable').DataTable({
+            "searching": false,
+            "paging":true,
+            "pageLength":10,
+            "processing":true,
+            "serverSide":true,
+            'ajax':{
+                'type':'POST',
+                'url':'/category/categorieslist'
+            },
+            'columns':
+            [
+                {'data':'name',"defaultContent":"",'name':'Name'},
+                {'data':'slug',"defaultContent":"",'name':'Slug'},
+                {'data':'categoryID',"defaultContent":"",'name':'category ID'},
+            ],
+            'columnDefs':
+            [
+                {
+                    render:function(data , type , row)
+                    {
+                        tag= '<a class="btn btn-primary list_item_button lb_button" href="/category/form/'+row.id+'">Edit </a><a class="btn btn-danger list_item_button lb_button ml-3" onclick="$(this).delete_entry(`'+row.id+'`);">Delete</a>';  
+                        return tag
+                    },
+                    "targets":3
+                },
+                {
+                    "searchable":false,
+                    "orderable":false,
+                },
+            ]
+        });
+
+       $.fn.delete_entry = function(id){
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.value) {
+
+                    $.get("/category/delete/"+id, function(result){
+                        if(result.status == 200){
+                            CategoryDataTable.draw();
+                                Swal.fire('Great!', 'Entries deleted successfully!', 'success');
+                            } else {
+                                Swal.fire('Oops...', 'Something went wrong!', 'error');
+                            }
+                    })
+
+                }
+            })
+
+        }
+
+        $(function(){
+        $('#searchName').autocomplete({
+            source:function(req,res){
+                $.ajax({
+                    url:"autocomplete/",
+                    dataType:"jsonp",
+                    type:"GET",
+                    data:req,
+                    success:function(data){
+                        res(data)
+                    },
+                    error:function(err){
+                        console.log(err.status)
+                    }
+                });
+            },
+            minLength:1,
+            select: function(event,ui){
+                if(ui.item)
+                {
+                    $('#searchName').text(ui.item.label);
+
+                }
+            }
+        })
+    })
+        
+    })
+</script>

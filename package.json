@@ -1,0 +1,35 @@
+{
+  "name": "graduationproj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Nitinkumar",
+  "license": "ISC",
+  "engines": {
+    "node": "10.19.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "bcrypt": "^5.0.0",
+    "body-parse": "^0.1.0",
+    "bootstrap": "^4.5.2",
+    "cookie-parser": "^1.4.5",
+    "datatables": "^1.10.18",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "feather-icons": "^4.28.0",
+    "handlebars": "^4.7.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "mongoose-auto-increment": "^5.0.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.11",
+    "nodemon": "^2.0.4",
+    "xlsx": "^0.16.6"
+  }
+}

@@ -1,0 +1,52 @@
+<div class="card shadow mt-4 mb-4 parent_card" style="width: max-content; margin-left:18%">
+    
+    <h1 class="heading" style="margin-left:30%">Enquiry Data</h1>
+
+    <hr class="sidebar-divider">
+
+<div class="flex_enquiry_view">
+
+{{#each Productdata}}
+    <div class="product_enquiry_card">
+
+    <div class="card mt-3 ml-3 mb-3" style="width: 18rem; ">
+        <img class="card-img-top" src="/misc/{{this.product_image}}" alt="{{this.name}}">
+    <div class="card-body">
+        <h5 class="card-title">{{this.name}}</h5>
+        <p class="card-text">{{this.description}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Product id :{{this.cat_id}} </li>
+        <li class="list-group-item">Price: ${{this.price}}</li>
+    </ul>
+    <div class="card-body">
+        <a href="/products/update/{{this._id}}" class="card-link">Edit product</a>
+        <a href="/products/delete/{{this._id}}" class="card-link">Delete product</a>
+    </div>
+    </div>
+    </div>
+{{/each}}
+
+
+    <div class="vl ml-5 mr-5 mb-3"></div>
+
+    <div class="customer_enquiry_card">
+        <div class="card mt-3 mb-3 mr-3" style="width: 18rem";>
+        <div class="card-body" style="height: 10px";>
+            <h5 class="card-title">{{Enquirydata.name}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="background-color: rgb(2, 2, 88); color:cornsilk">Subject:</li>
+            <li class="list-group-item">{{Enquirydata.subject}}</li>
+            <li class="list-group-item" style="background-color: rgb(2, 2, 88); color:cornsilk">Message:</li>
+            <li class="list-group-item"><p class="card-text">{{Enquirydata.message}}</p></li>
+            <li class="list-group-item" style="background-color: rgb(2, 2, 88); color:cornsilk">Phone number:</li>
+            <li class="list-group-item">{{Enquirydata.phoneno}}</li>
+            <li class="list-group-item" style="background-color: rgb(2, 2, 88); color:cornsilk">Email id:</li>
+            <li class="list-group-item">{{Enquirydata.email}}</li>
+        </ul>
+        </div>
+    </div>
+
+</div>
+</div>

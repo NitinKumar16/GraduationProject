@@ -1,0 +1,62 @@
+<div class="wrapper wrapper--w680">
+<div class="card card-1">
+<div class="card-heading"></div>
+<div class="card-body">
+{{#ifEquals mode "create"}}
+    <h2 class="title">Registration Info</h2>
+{{else}}
+    <h2 class="title">Edit Information</h2>
+{{/ifEquals}}
+
+{{#ifEquals mode "create"}}
+    <form action="/users/upload" method="POST">
+{{else}}
+    <form action="/users/update/{{user._id}}" method="POST">
+{{/ifEquals}}
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="text" placeholder="NAME" name="name">
+            {{else}}
+                <input class="input--style-1" type="text" value="{{user.name}}" placeholder="NAME" name="name">
+            {{/ifEquals}}
+        </div>
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="text" placeholder="EMAIL" name="email">
+            {{else}}
+                <input class="input--style-1" type="text" value="{{user.email}}"  placeholder="EMAIL" name="email">
+            {{/ifEquals}}
+        </div>
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="password" placeholder="PASSWORD" name="password">
+            {{else}}
+                <input class="input--style-1" type="password" value="{{user.password}}" placeholder="PASSWORD" name="password">
+            {{/ifEquals}}
+        </div>
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="number" placeholder="AGE" name="age">
+            {{else}}
+                <input class="input--style-1" type="number" value="{{user.age}}" placeholder="AGE" name="age">
+            {{/ifEquals}}
+        </div>
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="text" placeholder="ROLE" name="role">
+            {{else}}
+                <input class="input--style-1" type="text" value="{{user.role}}" placeholder="ROLE" name="role">
+            {{/ifEquals}}
+        </div>
+        <p class="note-text">Enter "admin" for aministrative role and "user" for non administrative role</p>
+        <div class="p-t-20">
+            {{#ifEquals mode "create"}}
+                <button class="btn btn--radius btn--green" type="submit">Submit</button>
+            {{else}}
+                <button class="btn btn--radius btn--green" type="submit">Confirm Edit</button>
+            {{/ifEquals}}
+        </div>
+    </form>
+</div>
+</div>
+</div>

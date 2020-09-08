@@ -1,0 +1,155 @@
+.d-block{
+    height:500px;
+    object-fit: cover;
+}
+
+.flex-product{
+    display: flex;
+    flex-wrap: nowrap;
+    float: right;
+    flex-flow: row wrap;
+    flex-direction: row ; 
+    margin:10px;
+    align-content: flex-end;
+  }
+
+.rounded{
+    object-fit: cover;
+    height:200px;
+    width: 200px;
+}
+
+.card-img-top{
+    height:180px
+}
+
+.list-group-item:hover{
+    background-color: rgb(71, 97, 243);
+    color:rgb(255, 255, 255);
+}
+
+.cat-list-item:hover{
+  text-decoration:none;
+  color:rgb(255, 255, 255);
+}
+
+.image-dashboard{
+    width: 50%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.text_para{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left:10%;
+    font-size: 40px;
+    text-decoration: crimson;
+    font-style: italic;
+    align-items: center;
+    font-family: 'Bebas Neue';
+}
+.text_para_home{
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left:20%;
+    font-size: 60px;
+    text-decoration: crimson;
+    font-style: italic;
+    align-items: center;
+    font-family: 'Bebas Neue';
+}
+
+.list-group-cat{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-left: 25%;
+  }
+
+.list-group{
+    margin:20px;
+    width:30%;
+    display: flex;
+}
+
+.displayflex{
+    margin:20px;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+.cat-list-item{
+    text-decoration: white;
+}
+
+
+
+.model-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 350px;
+    width: 100%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 2px rgba(254,236,164,1); 
+  }
+  
+  .modal-body h2{
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #332902;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  
+  .modal-body .input_field{
+    margin-bottom: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  
+  .modal-body .input_field input[type="text"],
+  .modal-body textarea{
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    padding: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  
+  .modal-body textarea{
+    resize: none;
+    height: 80px;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  
+  .submit-button{
+    border: 0px;
+    margin-top: 15px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    background: #fece0c;
+    color: #332902;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+  
+  #error_message{
+    margin-bottom: 20px;
+    background: #fe8b8e;
+    padding: 0px;
+    text-align: center;
+    font-size: 14px;
+    transition: all 0.5s ease;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+
+  /*success page css */

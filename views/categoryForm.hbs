@@ -1,0 +1,43 @@
+<div class="wrapper wrapper--w680">
+<div class="card card-1">
+<div class="card-heading">
+</div>
+<div class="card-body">
+{{#ifEquals mode "create"}}
+    <h2 class="title">Registration Info</h2>
+{{else}}
+    <h2 class="title">Edit Information</h2>
+{{/ifEquals}}
+
+{{#ifEquals mode "create"}}
+    <form action="/category/upload" method="POST">
+{{else}}
+    <form action="/category/update/{{category._id}}"method="POST">
+{{/ifEquals}}
+
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="text" placeholder="CATEGORY NAME" name="categoryname">
+            {{else}}
+                <input class="input--style-1" type="text" value="{{category.name}}" placeholder="CATEGORY NAME" name="categoryname">
+            {{/ifEquals}}
+        </div>
+        <div class="input-group">
+            {{#ifEquals mode "create"}}
+                <input class="input--style-1" type="text" placeholder="SLUG" name="slug">
+            {{else}}
+                <input class="input--style-1" type="text" value="{{category.slug}}"  placeholder="SLUG" name="slug">
+            {{/ifEquals}}
+        </div>
+
+        <div class="p-t-20">
+            {{#ifEquals mode "create"}}
+                <button class="btn btn--radius btn--green" type="submit">Submit</button>
+            {{else}}
+                <button class="btn btn--radius btn--green" type="submit">Confirm Edit</button>
+            {{/ifEquals}}
+        </div>
+    </form>
+</div>
+</div>
+</div>

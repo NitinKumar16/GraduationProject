@@ -1,0 +1,64 @@
+
+<div class="card shadow mt-4 parent_card">
+<div class="flex-product">
+{{#each data}}
+<div class="card m-3" style="width:  18rem;">
+  <img src="/misc/{{this.product_image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}}</h5>
+    <p class="card-text">{{this.description}}</p>
+    <p class="card-text">Product Id:{{this.cat_id}}</p>
+    <p class="card-text">Price:$ {{this.price}}</p>
+    <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#contactModal">Enquire</a>
+  </div>
+</div>
+{{/each}}
+</div>
+</div>
+
+
+<!--Contact us form for the product-->
+
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a class="close modal_close" type="button" data-dismiss="modal" aria-label="Close"><i class="fa fa-times-circle"></i></a>
+          <div class="title_container">
+              <h2>Contact us</h2>
+          </div>
+          <hr class="lb_separator">
+
+            <form id="excelForm" method="POST" action="/enquiryForm">
+              <div class="input_field">
+                  <input type="text" placeholder="Enter your name"name="Contactname">
+              </div>
+              <div class="input_field">
+                  <input type="text" placeholder="Enter product id you want help with" name="Prodid">
+              </div>
+              <div class="input_field">
+                  <input type="text" placeholder="Subject of enquiry" name="Subject">
+              </div>
+              <div class="input_field">
+                  <input type="text" placeholder="Phone number" name="Phone">
+              </div>
+              <div class="input_field">
+                  <input type="text" placeholder="Email id" name="Email">
+              </div>
+              <div class="input_field">
+                  <textarea placeholder="Message" name="Message"></textarea>
+              </div>
+              <button type="submit" class="submit-button btn-primary lb_button" style="margin-top: 50px;">Submit</button>
+            </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<!--End of contact form-->
+
+
+
+
+
+    

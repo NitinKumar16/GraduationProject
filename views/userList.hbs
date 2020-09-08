@@ -1,0 +1,152 @@
+<div class="card shadow mt-4 parent_card">
+    <h1 class="heading">Users</h1>
+    <hr class="sidebar-divider">
+    <div class="back">
+        <div class="back1">
+            <div class="button_base b04_3d_tick">
+                <div>
+                    <a class="button-text" href="/users/form/new">Add New user</a>
+                </div>
+                <div>
+                    <a class="button-text-flip" href="/users/form/new">Add New user</a>
+                </div>
+            </div>
+        </div>
+        <div class="back2">
+            <div class="button_base b04_3d_tick">
+                <div>
+                    <a class="button-text" href="#" data-toggle="modal" data-target="#excelModal">Excel Import</a>
+                </div>
+                <div>
+                    <a class="button-text-flip" href="#" data-toggle="modal" data-target="#excelModal">Excel Import</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<hr class="sidebar-divider my-3">
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control ml-5" type="search" id="searchName" placeholder="Search User name" aria-label="Search">
+      <button class="btn btn-outline-success ml-4" type="submit">Search</button>
+    </form>
+
+<hr class="sidebar-divider my-3">
+ 
+
+    <div class="card-body">
+    <div class="UserTable">
+    <table id="UserDataTable"  class="table table-bordered lb_table" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="table_header">Email</th>
+            <th class="table_header">Name</th>
+            <th class="table_header">Role</th>
+            <th class="table_header">Actions</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email</td>
+                <td>Name</td>
+                <td>Role</td>
+                <td>Actions</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+</div>
+
+<!--Excel upload modal-->
+    <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+
+            <div class="title_container">
+                <!-- Modal Heading -->
+                <h1 class="h3 mb-2 page_title">Upload Excel</h1>
+                <a class="close modal_close" type="button" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></a>
+
+            </div>
+            <hr class="lb_separator">
+
+             <form class="excelForm lb_form" id="excelForm" method="POST" enctype="multipart/form-data" action="/auth/importUsers">
+                <div class="form-group">
+                    <input type="file" class="form-control-file" id="excelFile" name="excelFile" accept=".xls,.xlsx,.csv" required>
+                    <button type="submit" class="btn btn-primary lb_button" style="margin-top: 50px;">Submit</button>
+                </div>
+             </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+    jQuery(document).ready(function(){
+        var UserDataTable = jQuery('#UserDataTable').DataTable({
+            "searching": false,
+            "paging":true,
+            "pageLength":10,
+            "processing":true,
+            "serverSide":true,
+            'ajax':{
+                'type':'POST',
+                'url':'/users/userlist'
+            },
+            'columns':
+            [
+                {'data':'email',"defaultContent":"",'name':'Email'},
+                {'data':'name',"defaultContent":"",'name':'Name'},
+                {'data':'role',"defaultContent":"",'name':'Role'},
+            ],
+            'columnDefs':
+            [
+                {
+                    render:function(data , type , row)
+                    {
+                        tag= '<a class="btn btn-primary list_item_button lb_button" href="/users/form/'+row.id+'">Edit </a><a class="btn btn-danger list_item_button lb_button ml-3" onclick="$(this).delete_entry(`'+row.id+'`);">Delete</a>';  
+                        return tag
+                    },
+                    "targets":3
+                },
+                {
+                    "searchable":false,
+                    "orderable":false,
+                },
+            ]
+        });
+
+        $(function(){
+        $('#searchName').autocomplete({
+            source:function(req,res){
+                $.ajax({
+                    url:"autocomplete/",
+                    dataType:"jsonp",
+                    type:"GET",
+                    data:req,
+                    success:function(data){
+                        res(data)
+                    },
+                    error:function(error){
+                        console.log(err.status)
+                    }
+                });
+            },
+            minLength:1,
+            select: function(event,ui){
+                if(ui.item)
+                {
+                    $('#searchName').text(ui.item.label);
+
+                }
+            }
+        })
+    })
+        
+    })
+</script>

@@ -1,0 +1,15 @@
+<p class="text_para">Choose from our widest range of categories! I am sure you will find something.</p>
+
+<hr class="sidebar-divider mt-1">
+
+<ul class="list-group-cat list-group-horizontal mt-3">
+    {{#each data}}
+  <li class="list-group-item">
+      <a class="cat-list-item"  href="/NonAdminproducts/{{this.slug}}">{{this.name}}</a>
+  </li>
+  {{/each}}
+</ul>
+
+<div>
+    <img class="image-dashboard" src="/images/undraw_wilderness_81ka.svg" alt="Explore from wide number of categories"> 
+</div>
